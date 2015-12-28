@@ -147,7 +147,7 @@ return [
 
         /* Provider for application */
         Collective\Html\HtmlServiceProvider::class,
-
+        SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
     ],
 
     /*
@@ -200,6 +200,7 @@ return [
         /* Facades for application */
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
+        'Facebook'  => SammyK\LaravelFacebookSdk\FacebookFacade::class,
     ],
 
 ];

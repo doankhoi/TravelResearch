@@ -17,16 +17,15 @@ Route::get('/', function () {
 
 Route::get('/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@login']); 
 
-/* Route for user */
+/* Route for user admin */
 Route::group(['namespace' => 'Website', 'middleware' => 'website'], function() {
-
 	Route::get('/top', ['as' => 'top', 'uses' => 'WebsiteController@index']);
+
+	Route::get('/facebook/login', ['as' => 'facebook.login', 'uses' => 'WebsiteController@loginFacebook']);
+	Route::get('/facebook/callback', 'WebsiteController@facebookCallback');
 });
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
-
-
-
