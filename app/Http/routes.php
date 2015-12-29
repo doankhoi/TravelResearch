@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('/auth/login');
+    return redirect(route('auth.login'));
 });
 
 Route::get('/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@login']); 
@@ -23,6 +23,10 @@ Route::group(['namespace' => 'Website', 'middleware' => 'website'], function() {
 
 	Route::get('/facebook/login', ['as' => 'facebook.login', 'uses' => 'WebsiteController@loginFacebook']);
 	Route::get('/facebook/callback', 'WebsiteController@facebookCallback');
+	Route::get('/updateOnlyListFace', ['as' => 'list.only.face', 'uses' => 'WebsiteController@updateOnlyListFace']);
+	Route::get('/updateAllListFace', ['as' => 'list.all.face', 'uses' => 'WebsiteController@updateAllListFace']);
+	Route::get('/listface', ['as' => 'list.face', 'uses' => 'WebsiteController@listface']);
+	Route::get('/downloadFace', ['as' => 'list.face.download', 'uses' => 'WebsiteController@downloadFace']);
 });
 
 Route::controllers([

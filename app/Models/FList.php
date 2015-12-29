@@ -12,6 +12,7 @@ class FList extends Model
     protected $fillable = [
         'serialno',
         'about',
+        'created_time',
         'category',
         'category_list_id',
         'category_list_name',
@@ -47,9 +48,10 @@ class FList extends Model
     protected static $graph_node_field_aliases = [
         'id' => 'serialno',
         'about' => 'about',
+        'created_time' => 'created_time',
         'category' => 'category',
-        'category_list.0.id' => 'category_list_id',
-        'category_list.0.name' => 'category_list_name',
+        // 'category_list.0.id' => 'category_list_id',
+        // 'category_list.0.name' => 'category_list_name',
         'company_overview' => 'company_overview',
         'cover.cover_id' => 'cover_cover_id',
         'cover.offset_x' => 'cover_offset_x',

@@ -12,9 +12,15 @@
                     <div class="form-horizontal">
                         <div class="row">
                             <div class="col-sm-5 col-sm-offset-5">
-                                <a href="{!! route('facebook.login') !!}" class="btn btn-primary btn-action {{ isset($disableFace) ? $disableFace : '' }}">
+                            @if (!Session::get('face_logined', false))
+                                <a href="{!! route('facebook.login') !!}" class="btn btn-primary btn-action">
                                     Login with facebook
                                 </a>
+                            @else 
+                                <a href="{!! route('facebook.login') !!}" class="btn btn-primary btn-action disabled">
+                                    Login with facebook
+                                </a>
+                            @endif
                             </div>
                         </div>
                         <div class="box-control">
@@ -26,9 +32,15 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-1 wr-action">
-                                        <a href="javascript:void(0)" class="btn btn-default {{ isset($disableFace) ? $disableFace : '' }}">
+                                    @if (!Session::get('face_logined', false))
+                                        <a href="javascript:void(0)" class="btn btn-default disabled">
                                             リスト取得（更新）
                                         </a>
+                                    @else
+                                        <a href="{!! route('list.only.face') !!}" class="btn btn-default">
+                                            リスト取得（更新）
+                                        </a>
+                                    @endif
                                     </div>
                                 </div>
                             </div>
@@ -40,19 +52,31 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-1 wr-action">
-                                        <a href="javascript:void(0)" class="btn btn-default {!! isset($disableFace) ? "" : $disableFace !!}">
+                                    @if (!Session::get('face_logined', false))
+                                        <a href="javascript:void(0)" class="btn btn-default disabled">
                                             基本情報取得（更新)
                                         </a>
+                                    @else
+                                        <a href="{!! route('list.all.face') !!}" class="btn btn-default">
+                                            基本情報取得（更新)
+                                        </a>
+                                    @endif
                                     </div>
                                     <div class="col-sm-4 col-sm-offset-1 wr-action">
-                                        <a href="#" class="{!! isset($disableFace) ? "" : $disableFace !!}">取得状況一覧</a>
+                                        <a href="{!! route('list.face') !!}">取得状況一覧</a>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-1 wr-action">
-                                        <a href="javascript:void(0)" class="btn btn-default {!! isset($disableFace) ? "" : $disableFace!!}">
+                                    @if (!Session::get('face_logined', false))
+                                        <a href="javascript:void(0)" class="btn btn-default disabled">
                                             CSVダウンロード
                                         </a>
+                                    @else
+                                        <a href="{!! route('list.face.download') !!}" class="btn btn-default">
+                                            CSVダウンロード
+                                        </a>
+                                    @endif
                                     </div>
                                 </div>
                             </div>
