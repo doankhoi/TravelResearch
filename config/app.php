@@ -149,6 +149,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
         'Maatwebsite\Excel\ExcelServiceProvider',
+        'Thujohn\Twitter\TwitterServiceProvider',
     ],
 
     /*
@@ -203,6 +204,7 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Facebook'  => SammyK\LaravelFacebookSdk\FacebookFacade::class,
         'Excel'     => 'Maatwebsite\Excel\Facades\Excel',
+        'Twitter' => 'Thujohn\Twitter\Facades\Twitter',
     ],
 
 ];
