@@ -38,9 +38,6 @@ Route::group(['namespace' => 'Website', 'middleware' => 'website'], function() {
     Route::get('/twitter/login', ['as' => 'twitter.login', 'uses' => 'WebsiteController@loginTwitter']);
     Route::get('/twitter/callback', ['as' => 'twitter.callback', 'uses' => 'WebsiteController@twitterCallback']);
     Route::get('/updatedListTwitter', ['as' => 'list.all.twitter', 'uses' => 'WebsiteController@updatedListTwitter']);
-    Route::get('/demo', function() {
-        return dd(Twitter::getUsers(['screen_name' => 'nta_jp', 'count' => 20, 'format' => 'array']));
-    });
 });
 
 Route::controllers([

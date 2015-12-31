@@ -54,6 +54,12 @@ class TwitterReposity
         $result['profile_location'] = $rawArr['profile_location'];
         $result['description'] = $rawArr['description'];
         $result['url'] = $rawArr['url'];
+        $result['entities_url_url'] = $rawArr['entities']['url']['urls'][0]['url'];
+        $result['entities_url_expanded_url'] = $rawArr['entities']['url']['urls'][0]['expanded_url'];
+        $result['entities_url_display_url'] = $rawArr['entities']['url']['urls'][0]['display_url'];
+        $result['entities_description_url'] = $rawArr['entities']['description']['urls'][0]['url'];
+        $result['entities_description_expanded_url'] = $rawArr['entities']['description']['urls'][0]['expanded_url'];
+        $result['entities_description_display_url'] = $rawArr['entities']['description']['urls'][0]['display_url'];
         $result['followers_count'] = $rawArr['followers_count'];
         $result['friends_count'] = $rawArr['friends_count'];
         $result['listed_count'] = $rawArr['listed_count'];
