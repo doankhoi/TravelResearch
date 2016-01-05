@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'List twitter')
+@section('title', 'Twitter情報一覧')
 
 @section('content')
     @include('elements.flash_notification')

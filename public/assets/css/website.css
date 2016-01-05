@@ -12,3 +12,11 @@
 .bt-login{
 	width: 150px;
 }
+
+.link-csv{
+	text-decoration: underline;
+}
+
+.btn-gray{
+	background-color: #EEEEEE;
+}

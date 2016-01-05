@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Add twitter')
+@section('title', 'Twitterアカウントの登録')
 
 @section('content')
     @include('elements.flash_notification')
@@ -12,7 +12,7 @@
                         <div class="form-group">
                             {!! Form::text('screen_name', null, ['class' => 'form-control']) !!}
                         </div>
-                        {!! Form::submit('登録', ['class' => 'btn btn-default', 'id' => 'btn-add-twitter']) !!}
+                        {!! Form::submit('登録', ['class' => 'btn btn-default btn-gray', 'id' => 'btn-add-twitter']) !!}
                     {!! Form::close() !!}
                 </div>
                 <br>

@@ -16,7 +16,7 @@
             <nav class="navbar navbar-default navbar-static-top">
                 <div class="container">
                     <div class="navbar-brand">
-                        {!! link_to_route('top', 'Get system data', null) !!}
+                        {!! link_to_route('top', 'TravelResearch', null) !!}
                     </div>
                     <a href="{!! url('auth/logout') !!}" class="btn btn-primary navbar-btn pull-right btn-action">
                         ログアウト

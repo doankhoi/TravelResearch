@@ -1,10 +1,10 @@
 @extends('layouts.master')
-@section('title', 'Top')
+@section('title', 'トップ')
 
 @section('content')
     @include('elements.flash_notification')
     <div class="panel panel-primary">
-        <div class="panel-heading">Total</div>
+        <div class="panel-heading">トップ</div>
         <div class="panel-body">
             <div class="panel panel-default">
                 <div class="panel-heading">■ Facebook情報の取得</div>
@@ -33,11 +33,11 @@
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-1 wr-action">
                                     @if (!Session::get('face_logined', false))
-                                        <a href="javascript:void(0)" class="btn btn-default disabled">
+                                        <a href="javascript:void(0)" class="btn btn-default disabled btn-gray">
                                             リスト取得（更新）
                                         </a>
                                     @else
-                                        <a href="{!! route('list.only.face') !!}" class="btn btn-default">
+                                        <a href="{!! route('list.only.face') !!}" class="btn btn-default btn-gray">
                                             リスト取得（更新）
                                         </a>
                                     @endif
@@ -53,30 +53,24 @@
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-1 wr-action">
                                     @if (!Session::get('face_logined', false))
-                                        <a href="javascript:void(0)" class="btn btn-default disabled">
+                                        <a href="javascript:void(0)" class="btn btn-default disabled btn-gray">
                                             基本情報取得（更新)
                                         </a>
                                     @else
-                                        <a href="{!! route('list.all.face') !!}" class="btn btn-default">
+                                        <a href="{!! route('list.all.face') !!}" class="btn btn-default btn-gray">
                                             基本情報取得（更新)
                                         </a>
                                     @endif
                                     </div>
                                     <div class="col-sm-4 col-sm-offset-1 wr-action">
-                                        <a href="{!! route('list.face') !!}">取得状況一覧</a>
+                                        <a href="{!! route('list.face') !!}" class="link-csv">取得状況一覧</a>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-1 wr-action">
-                                    @if (!Session::get('face_logined', false))
-                                        <a href="javascript:void(0)" class="btn btn-default disabled">
+                                        <a href="{!! route('list.face.download') !!}" class="btn btn-default btn-gray">
                                             CSVダウンロード
                                         </a>
-                                    @else
-                                        <a href="{!! route('list.face.download') !!}" class="btn btn-default">
-                                            CSVダウンロード
-                                        </a>
-                                    @endif
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +105,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-1 wr-action">
-                                        <a href="{!! route('add.twitter') !!}" class="btn btn-default">
+                                        <a href="{!! route('add.twitter') !!}" class="btn btn-default btn-gray">
                                             リスト登録
                                         </a>
                                     </div>
@@ -125,17 +119,17 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-1 wr-action">
-                                        <a href="{!! route('list.all.twitter') !!}" class="btn btn-default">
+                                        <a href="{!! route('list.all.twitter') !!}" class="btn btn-default btn-gray">
                                             基本情報取得（更新）
                                         </a>
                                     </div>
                                     <div class="col-sm-4 col-sm-offset-1 wr-action">
-                                        <a href="{!! route('list.twitter') !!}">取得状況一覧</a>
+                                        <a href="{!! route('list.twitter') !!}" class="link-csv">取得状況一覧</a>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-1 wr-action">
-                                        <a href="{!! route('list.twitter.download') !!}" class="btn btn-default">
+                                        <a href="{!! route('list.twitter.download') !!}" class="btn btn-default btn-gray">
                                             CSVダウンロード
                                         </a>
                                     </div>

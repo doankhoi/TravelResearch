@@ -24,7 +24,7 @@ class StoreTwitterRequest extends Request
     public function rules()
     {
         return [
-            'screen_name' => 'required|unique:tlist,screen_name'
+            'screen_name' => 'required|unique:tlist'
         ];
     }
 }

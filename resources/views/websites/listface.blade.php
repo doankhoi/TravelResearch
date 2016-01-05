@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'List facebook')
+@section('title', 'Facebook登録済み一覧')
 
 @section('content')
     @include('elements.flash_notification')

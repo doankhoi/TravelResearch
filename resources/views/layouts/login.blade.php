@@ -13,7 +13,7 @@
             <nav class="navbar navbar-default navbar-static-top">
                 <div class="container">
                     <div class="navbar-header">
-                        <div class="navbar-brand">Get data system</div>
+                        <div class="navbar-brand">TravelResearch</div>
                     </div>
                 </div>
             </nav>

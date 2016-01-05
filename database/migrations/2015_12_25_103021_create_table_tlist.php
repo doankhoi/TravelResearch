@@ -14,7 +14,7 @@ class CreateTableTlist extends Migration
     {
         Schema::create('tlist', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('serialno')->unique();
+            $table->bigInteger('serialno');
             $table->string('t_id', 20);
             $table->string('t_id_str', 20);
             $table->string('name', 50);

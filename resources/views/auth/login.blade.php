@@ -1,10 +1,10 @@
 @extends('layouts.login')
-@section('title', 'Đăng nhập')
+@section('title', 'ログイン')
 
 @section('content')
     {!! Form::open(['url' => 'auth/login', 'class' => 'form-horizontal']) !!}
         <div class="col-xs-8 col-xs-offset-2">
-            <h3 class="form-group text-center fr-margin-bottom">Login</h3>
+            <h3 class="form-group text-center fr-margin-bottom">ログイン</h3>
             @include('elements.flash_notification')
             <div class="form-group">
                 <label for="log" class="col-xs-2 margin-label">ログインＩＤ</label>

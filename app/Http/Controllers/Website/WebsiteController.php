@@ -69,7 +69,11 @@ class WebsiteController extends Controller
             $helper = $this->_fb->getRedirectLoginHelper();
 
             if (!$helper->getError()) {
-                abort(403, 'Unauthorized action.');
+                //abort(403, 'Unauthorized action.');
+                $message = "Unauthorized action.";
+                $alertClass = "alert-danger";
+                Session::put('face_logined', false);
+                return redirect(route('top'))->with(compact('message', 'alertClass'));
             }
 
             $message = "User denied the request.";

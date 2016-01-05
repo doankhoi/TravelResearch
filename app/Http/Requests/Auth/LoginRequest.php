@@ -28,4 +28,12 @@ class LoginRequest extends Request
             'password' => 'required'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'log.required' => 'ID、パスワードは必須です。',
+            'password.required' => 'ID、パスワードは必須です。'
+        ];
+    }
 }
