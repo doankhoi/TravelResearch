@@ -17,7 +17,7 @@
                                     Login with facebook
                                 </a>
                             @else 
-                                <a href="{!! route('facebook.login') !!}" class="btn btn-primary bt-login disabled">
+                                <a href="{!! route('facebook.login') !!}" class="btn btn-warning bt-login disabled">
                                     Login with facebook
                                 </a>
                             @endif
@@ -87,11 +87,11 @@
                             <div class="col-sm-5 col-sm-offset-5">
                                 @if (!Session::get('twitter_loged', false))
                                     <a href="{!! route('twitter.login') !!}" class="btn btn-primary bt-login">
-                                        Login with twitter.
+                                        Login with twitter
                                     </a>
                                 @else
-                                    <a href="{!! route('twitter.login') !!}" class="btn btn-primary bt-login disabled">
-                                        Login with twitter.
+                                    <a href="{!! route('twitter.login') !!}" class="btn btn-warning bt-login disabled">
+                                        Login with twitter
                                     </a>
                                 @endif
                             </div>

@@ -274,6 +274,7 @@ class WebsiteController extends Controller
 
             Excel::create('ListTwitter', function($excel) use ($listTwitter) {
                 $excel->sheet('Sheet', function($sheet) use($listTwitter) {
+                    $sheet->setOrientation('portrait');
                     $sheet->fromArray($listTwitter);
                 });
             })->download('csv');
