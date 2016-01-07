@@ -6,6 +6,7 @@ use Facebook\Exceptions\FacebookSDKException;
 use App\Restful\Constants;
 use App\Models\FList;
 use Session;
+use Exception;
 
 /**
 * Store data from facebook
@@ -37,14 +38,14 @@ class FacebookReposity
             $this->__fb->setDefaultAccessToken(Session::get('fb_user_access_token', ''));
             $response = $this->__fb->get($query);
         } catch (FacebookSDKException $e) {
-            throw new Exception("Error Processing Request", 1);
+            throw new Exception("Error Processing Request");
         }
 
         try {
             $page = $response->getGraphNode();
             FList::createOrUpdateGraphNode($page);
         } catch (Exception $e) {
-        	throw new Exception("Error Processing Request", 1);
+        	throw new Exception("Error Processing Request");
         }
 	}
 
@@ -70,7 +71,7 @@ class FacebookReposity
                 }
             } while (($feedEdge = $this->__fb->next($feedEdge)));
         } catch (Exception $e) {
-            throw new Exception("Error Processing Request", 1);
+            throw new Exception("Error Processing Request");
         }
     }
 }

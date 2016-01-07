@@ -18,6 +18,7 @@ use App\Models\TList;
 use Twitter;
 use Input;
 use App\Reposities\TwitterReposity;
+use Exception;
 
 class WebsiteController extends Controller
 {
@@ -45,7 +46,7 @@ class WebsiteController extends Controller
      */
     public function loginFacebook()
     {
-        $login_url = $this->_fb->getLoginUrl(['email']);
+        $login_url = $this->_fb->getLoginUrl(Constants::PERMISSION_USERS);
         return redirect($login_url);
     }
 
@@ -203,12 +204,14 @@ class WebsiteController extends Controller
     public function storeScreenName(StoreTwitterRequest $request)
     {
         try {
+            Twitter::getUsers(['screen_name' => $request->screen_name, 'format' => 'array']);
             TList::create($request->all());
             $message = "Store screen_name successfully.";
             $alertClass = "alert-success";
         } catch (Exception $e) {
-            $message = "Store screen_name error.";
+            $message = "Store screen_name not exist.";
             $alertClass = "alert-danger";
+            return redirect(route('top'))->with(compact('message', 'alertClass'));
         }
         return redirect(route('top'))->with(compact('message', 'alertClass'));
     }
