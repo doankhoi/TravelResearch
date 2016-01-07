@@ -14,11 +14,11 @@
                             <div class="col-sm-5 col-sm-offset-5">
                             @if (!Session::get('face_logined', false))
                                 <a href="{!! route('facebook.login') !!}" class="btn btn-primary bt-login">
-                                    Login with facebook
+                                    Log in with facebook
                                 </a>
                             @else 
                                 <a href="{!! route('facebook.login') !!}" class="btn btn-warning bt-login disabled">
-                                    Login with facebook
+                                    Log in with facebook
                                 </a>
                             @endif
                             </div>
@@ -33,7 +33,7 @@
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-1 wr-action">
                                     @if (!Session::get('face_logined', false))
-                                        <a href="javascript:void(0)" class="btn btn-default disabled btn-gray">
+                                        <a href="javascript:void(0)" class="btn btn-default disabled bt-disable">
                                             リスト取得（更新）
                                         </a>
                                     @else
@@ -53,7 +53,7 @@
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-1 wr-action">
                                     @if (!Session::get('face_logined', false))
-                                        <a href="javascript:void(0)" class="btn btn-default disabled btn-gray">
+                                        <a href="javascript:void(0)" class="btn btn-default disabled bt-disable">
                                             基本情報取得（更新)
                                         </a>
                                     @else
@@ -87,11 +87,11 @@
                             <div class="col-sm-5 col-sm-offset-5">
                                 @if (!Session::get('twitter_loged', false))
                                     <a href="{!! route('twitter.login') !!}" class="btn btn-primary bt-login">
-                                        Login with twitter
+                                        Log in with twitter
                                     </a>
                                 @else
                                     <a href="{!! route('twitter.login') !!}" class="btn btn-warning bt-login disabled">
-                                        Login with twitter
+                                        Log in with twitter
                                     </a>
                                 @endif
                             </div>

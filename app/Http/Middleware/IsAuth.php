@@ -19,7 +19,7 @@ class IsAuth
         if ($user) {
             return $next($request);
         } else {
-            $message = "Acount not permission";
+            $message = "Account not permission";
             $alertClass = "alert-danger";
             return redirect('/auth/login')->with(compact('message', 'alertClass'));
         }

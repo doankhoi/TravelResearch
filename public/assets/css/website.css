@@ -18,5 +18,9 @@
 }
 
 .btn-gray{
-	background-color: #EEEEEE;
+	background-color: #DDDDDD;
+}
+
+.bt-disable{
+	background-color: #EEEEEE !important;
 }
