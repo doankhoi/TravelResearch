@@ -226,8 +226,8 @@ class WebsiteController extends Controller
     {
         try {
             $listTwitter = DB::table('tlist')->select(
-            't_id',
-            't_id_str',
+            't_id as id',
+            't_id_str as id_str',
             'name',
             'screen_name',
             'location',

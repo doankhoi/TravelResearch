@@ -46,25 +46,33 @@ class TwitterReposity
     private function __convertToArrayTwitter($rawArr)
     {
         $result = [];
-        $result['t_id'] = array_key_exists("id", $rawArr) ? $rawArr['id'] : '';
+        $result['t_id'] = array_key_exists("id", $rawArr) ? $rawArr['id'] : 0;
         $result['t_id_str'] = array_key_exists("id_str", $rawArr) ? $rawArr['id_str'] : '';
         $result['name'] = array_key_exists("name", $rawArr) ? $rawArr['name'] : '';
         $result['screen_name'] = array_key_exists("screen_name", $rawArr) ? $rawArr['screen_name'] : '';
         $result['location'] = array_key_exists("location", $rawArr) ? $rawArr['location'] : '';
-        $result['profile_location'] = array_key_exists("profile_locationo", $rawArr) ? $rawArr['profile_location'] : '';
+        $result['profile_location'] = array_key_exists("profile_location", $rawArr) ? $rawArr['profile_location'] : '';
         $result['description'] = array_key_exists("description", $rawArr) ? $rawArr['description'] : '';
         $result['url'] = array_key_exists("url", $rawArr) ? $rawArr['url'] : '';
 
         if (array_key_exists("url", $rawArr['entities'])) {
-            $result['entities_url_url'] = array_key_exists("url", $rawArr['entities']['url']['urls'][0]) ? $rawArr['entities']['url']['urls'][0]['url'] : '';
-            $result['entities_url_expanded_url'] = array_key_exists("expanded_url", $rawArr['entities']['url']['urls'][0]) ? $rawArr['entities']['url']['urls'][0]['expanded_url'] : '';
-            $result['entities_url_display_url'] = array_key_exists("display_url", $rawArr['entities']['url']['urls'][0]) ? $rawArr['entities']['url']['urls'][0]['display_url'] : '';
+            if (array_key_exists("urls", $rawArr['entities']['url'])) {
+                if (count($rawArr['entities']['url']['urls']) > 0) {
+                    $result['entities_url_url'] = array_key_exists("url", $rawArr['entities']['url']['urls'][0]) ? $rawArr['entities']['url']['urls'][0]['url'] : '';
+                    $result['entities_url_expanded_url'] = array_key_exists("expanded_url", $rawArr['entities']['url']['urls'][0]) ? $rawArr['entities']['url']['urls'][0]['expanded_url'] : '';
+                    $result['entities_url_display_url'] = array_key_exists("display_url", $rawArr['entities']['url']['urls'][0]) ? $rawArr['entities']['url']['urls'][0]['display_url'] : '';
+                }
+            }
         }
         
-        if (array_key_exists("url", $rawArr['entities'])) {
-            $result['entities_description_url'] = array_key_exists("url", $rawArr['entities']['description']['urls'][0]) ? $rawArr['entities']['description']['urls'][0]['url'] : '';
-            $result['entities_description_expanded_url'] = array_key_exists("expanded_url", $rawArr['entities']['description']['urls'][0]) ? $rawArr['entities']['description']['urls'][0]['expanded_url'] : '';
-            $result['entities_description_display_url'] = array_key_exists("display_url", $rawArr['entities']['description']['urls'][0]) ? $rawArr['entities']['description']['urls'][0]['display_url'] : '';
+        if (array_key_exists("description", $rawArr['entities'])) {
+            if (array_key_exists("urls", $rawArr['entities']['description'])) {
+                if (count($rawArr['entities']['description']['urls']) > 0) {
+                    $result['entities_description_url'] = array_key_exists("url", $rawArr['entities']['description']['urls'][0]) ? $rawArr['entities']['description']['urls'][0]['url'] : '';
+                    $result['entities_description_expanded_url'] = array_key_exists("expanded_url", $rawArr['entities']['description']['urls'][0]) ? $rawArr['entities']['description']['urls'][0]['expanded_url'] : '';
+                    $result['entities_description_display_url'] = array_key_exists("display_url", $rawArr['entities']['description']['urls'][0]) ? $rawArr['entities']['description']['urls'][0]['display_url'] : '';
+                }
+            }
         }
         
         $result['followers_count'] = array_key_exists("followers_count", $rawArr) ? $rawArr['followers_count'] : '';
@@ -98,7 +106,7 @@ class TwitterReposity
         $result['profile_link_color'] = array_key_exists("profile_link_color", $rawArr) ? $rawArr['profile_link_color'] : '';
         $result['profile_sidebar_border_color'] = array_key_exists("profile_sidebar_border_color", $rawArr) ? $rawArr['profile_sidebar_border_color'] : '';
 
-        $result['profile_sidebar_fill_color'] = array_key_exists("profile_sidebar_border_color", $rawArr) ? $rawArr['profile_sidebar_fill_color'] : '';
+        $result['profile_sidebar_fill_color'] = array_key_exists("profile_sidebar_fill_color", $rawArr) ? $rawArr['profile_sidebar_fill_color'] : '';
         $result['profile_text_color'] = array_key_exists("profile_text_color", $rawArr) ? $rawArr['profile_text_color'] : '';
         $result['profile_use_background_image'] = array_key_exists("profile_use_background_image", $rawArr) ? $rawArr['profile_use_background_image'] : '';
 
