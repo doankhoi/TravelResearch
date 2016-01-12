@@ -20,6 +20,10 @@
                                 <a href="{!! route('facebook.login') !!}" class="btn btn-warning bt-login disabled">
                                     Log in with facebook
                                 </a>
+                                <span class="account-login">
+                                    Account: 
+                                    <b>{!! Session::get('username_loged_face', "Noname") !!}</b>
+                                </span>
                             @endif
                             </div>
                         </div>
@@ -93,6 +97,12 @@
                                     <a href="{!! route('twitter.login') !!}" class="btn btn-warning bt-login disabled">
                                         Log in with twitter
                                     </a>
+                                    <span class="account-login">
+                                        Account: 
+                                        <b>
+                                        {!! Session::get('username_loged_twitter', "Noname") !!}
+                                            </b>
+                                    </span>
                                 @endif
                             </div>
                         </div>

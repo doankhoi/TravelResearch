@@ -104,6 +104,10 @@ class WebsiteController extends Controller
 
         $message = "Login successfully";
         $alertClass = "alert-success";
+        $nameObject = $this->_fb->get(Constants::API_BASIC_INFO_FACEBOOK);
+        $arrObject = $nameObject->getGraphNode()->asArray();
+        $userLoginFace = array_key_exists("name", $arrObject) ? $arrObject["name"] : "";
+        Session::put('username_loged_face', $userLoginFace);
         Session::put('face_logined', true);
         return redirect(route('top'))->with(compact('message', 'alertClass'));
     }
@@ -146,7 +150,7 @@ class WebsiteController extends Controller
     {
         try {
             $listFanpage = DB::table('flist')->select(
-                'serialno',
+                'serialno as id',
                 'about',
                 'category',
                 'category_list_id',
@@ -161,7 +165,7 @@ class WebsiteController extends Controller
                 'description',
                 'founded',
                 'likes',
-                'links',
+                'links as link',
                 'location_city',
                 'location_country',
                 'location_latitude',
@@ -170,7 +174,7 @@ class WebsiteController extends Controller
                 'location_street',
                 'location_zip',
                 'mission',
-                'name2',
+                'name2 as name',
                 'products',
                 'talking_about_count',
                 'username',
@@ -274,7 +278,7 @@ class WebsiteController extends Controller
             $listTwitter = array_map(function($item) {
                 return (array) $item;
             }, $listTwitter);
-
+        
             Excel::create('ListTwitter', function($excel) use ($listTwitter) {
                 $excel->sheet('Sheet', function($sheet) use($listTwitter) {
                     $sheet->setOrientation('portrait');
@@ -325,7 +329,6 @@ class WebsiteController extends Controller
             if (Input::has('oauth_verifier')) {
                 $oauthVerifier = Input::get('oauth_verifier');
             }
-
             // getAccessToken() will reset the token for you
             $token = Twitter::getAccessToken($oauthVerifier);
 
@@ -337,10 +340,11 @@ class WebsiteController extends Controller
             }
 
             $credentials = Twitter::getCredentials();
-
             if (is_object($credentials) && !isset($credentials->error)) {
                 Session::put('access_token', $token);
                 Session::put('twitter_loged', true);
+                $username = isset($credentials->name) ? $credentials->name : "";
+                Session::put('username_loged_twitter',$username);
                 $message = "Login twitter successfully";
                 $alertClass = "alert-success";
                 return redirect(route('top'))->with(compact('message', 'alertClass'));
