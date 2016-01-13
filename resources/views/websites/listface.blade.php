@@ -10,9 +10,8 @@
                 <div class="col-sm-4 pull-left">
                     全体：　{!! $listFanpage->total() !!}件
                 </div>
-                <div class="col-sm-2 pull-right">
-                    <a href="{!! $listFanpage->previousPageUrl() !!}" class="">前へ</a>&nbsp;&nbsp;
-                    <a href="{!! $listFanpage->nextPageUrl() !!}" class="">次へ</a>
+                <div class="col-sm-8">
+                    @include('elements.paginate', ['records' => $listFanpage])
                 </div>
             </div>
             <br>

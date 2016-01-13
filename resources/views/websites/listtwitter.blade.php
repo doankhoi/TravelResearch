@@ -10,9 +10,8 @@
                 <div class="col-sm-4 pull-left">
                     全体：　{!! $listTwitter->total() !!}件
                 </div>
-                <div class="col-sm-2 pull-right">
-                    <a href="{!! $listTwitter->previousPageUrl() !!}" class="">前へ</a>&nbsp;&nbsp;
-                    <a href="{!! $listTwitter->nextPageUrl() !!}" class="">次へ</a>
+                <div class="col-sm-8">
+                    @include('elements.paginate', ['records' => $listTwitter])
                 </div>
             </div>
             <br>

@@ -1,30 +1,35 @@
 .box-control {
-	padding: 20px;
+    padding: 20px;
 }
 .wr-action {
-	margin: 10px;
+    margin: 10px;
 }
 
 #btn-add-twitter{
-	width: 100px;
+    width: 100px;
 }
 
 .bt-login{
-	width: 150px;
+    width: 150px;
 }
 
 .link-csv{
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 .btn-gray{
-	background-color: #DDDDDD;
+    background-color: #DDDDDD;
 }
 
 .bt-disable{
-	background-color: #EEEEEE !important;
+    background-color: #EEEEEE !important;
 }
 
 .account-login {
-	color: #0000FF;
+    color: #0000FF;
+}
+
+.pagination {
+    float: right;
+    display: inline;
 }
