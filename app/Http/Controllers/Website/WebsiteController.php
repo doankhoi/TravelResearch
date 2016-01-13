@@ -26,7 +26,7 @@ class WebsiteController extends Controller
     protected $_token;
     protected $_faceReposity;
     protected $_twitterReposity;
-    protected $_itemPerPage = 2;
+    protected $_itemPerPage = 5;
 
     public function __construct(LaravelFacebookSdk $fb)
     {
@@ -247,7 +247,7 @@ class WebsiteController extends Controller
         } catch (Exception $e) {
             $message = "Store screen_name not exist.";
             $alertClass = "alert-danger";
-            return redirect(route('top'))->with(compact('message', 'alertClass'));
+            return redirect()->back()->with(compact('message', 'alertClass'));
         }
         return redirect()->back()->with(compact('message', 'alertClass'));
     }
