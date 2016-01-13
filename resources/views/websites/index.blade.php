@@ -11,7 +11,7 @@
                 <div class="panel-body">
                     <div class="form-horizontal">
                         <div class="row">
-                            <div class="col-sm-5 col-sm-offset-5">
+                            <div class="col-sm-7 col-sm-offset-5">
                             @if (!Session::get('face_logined', false))
                                 <a href="{!! route('facebook.login') !!}" class="btn btn-primary bt-login">
                                     Log in with facebook
@@ -88,7 +88,7 @@
                 <div class="panel-body">
                     <div class="form-horizontal">
                         <div class="row">
-                            <div class="col-sm-5 col-sm-offset-5">
+                            <div class="col-sm-7 col-sm-offset-5">
                                 @if (!Session::get('twitter_loged', false))
                                     <a href="{!! route('twitter.login') !!}" class="btn btn-primary bt-login">
                                         Log in with twitter
@@ -101,7 +101,7 @@
                                         Account: 
                                         <b>
                                         {!! Session::get('username_loged_twitter', "Noname") !!}
-                                            </b>
+                                        </b>
                                     </span>
                                 @endif
                             </div>
