@@ -26,7 +26,7 @@ class WebsiteController extends Controller
     protected $_token;
     protected $_faceReposity;
     protected $_twitterReposity;
-    protected $_itemPerPage = 100;
+    protected $_itemPerPage = 2;
 
     public function __construct(LaravelFacebookSdk $fb)
     {
@@ -185,11 +185,43 @@ class WebsiteController extends Controller
                 return (array) $item;
             }, $listFanpage);
 
-            Excel::create('ListFanpageFacebook', function($excel) use ($listFanpage) {
-                $excel->sheet('Sheet', function($sheet) use($listFanpage) {
-                    $sheet->fromArray($listFanpage);
-                });
-            })->download('csv');
+            $header = [
+                'id',
+                'about',
+                'category',
+                'category_list_id',
+                'category_list_name',
+                'checkins',
+                'company_overview',
+                'cover_cover_id',
+                'cover_offset_x',
+                'cover_offset_y',
+                'cover_source',
+                'cover_id',
+                'description',
+                'founded',
+                'likes',
+                'link',
+                'location_city',
+                'location_country',
+                'location_latitude',
+                'location_longitude',
+                'location_state',
+                'location_street',
+                'location_zip',
+                'mission',
+                'name',
+                'products',
+                'talking_about_count',
+                'username',
+                'website',
+                'were_here_count'
+            ];
+            array_walk_recursive($listFanpage, function(&$item, $key){
+                $item = mb_convert_encoding($item, "SJIS");
+            });
+ 
+            $this->renderCSV($header, $listFanpage, "ListFacebook.csv");
         } catch (Exception $e) {
             $message = "Error when create CSV facebook.";
             $alertClass = "alert-danger";
@@ -217,7 +249,7 @@ class WebsiteController extends Controller
             $alertClass = "alert-danger";
             return redirect(route('top'))->with(compact('message', 'alertClass'));
         }
-        return redirect(route('top'))->with(compact('message', 'alertClass'));
+        return redirect()->back()->with(compact('message', 'alertClass'));
     }
 
     public function listTwitter()
@@ -247,7 +279,7 @@ class WebsiteController extends Controller
             'followers_count',
             'friends_count',
             'listed_count',
-            'created_at_t',
+            'created_at_t as created_at',
             'favourites_count',
             'utc_offset',
             'time_zone',
@@ -278,13 +310,58 @@ class WebsiteController extends Controller
             $listTwitter = array_map(function($item) {
                 return (array) $item;
             }, $listTwitter);
-        
-            Excel::create('ListTwitter', function($excel) use ($listTwitter) {
-                $excel->sheet('Sheet', function($sheet) use($listTwitter) {
-                    $sheet->setOrientation('portrait');
-                    $sheet->fromArray($listTwitter);
-                });
-            })->download('csv');
+
+            $header = [
+                'id',
+                'id_str',
+                'name',
+                'screen_name',
+                'location',
+                'profile_location',
+                'description',
+                'url',
+                'entities_url_url',
+                'entities_url_expanded_url',
+                'entities_url_display_url',
+                'entities_description_url',
+                'entities_description_expanded_url',
+                'entities_description_display_url',
+                'followers_count',
+                'friends_count',
+                'listed_count',
+                'created_at',
+                'favourites_count',
+                'utc_offset',
+                'time_zone',
+                'geo_enabled',
+                'verified',
+                'statuses_count',
+                'lang',
+                'status_created_at',
+                'status_id',
+                'status_id_str',
+                'status_text',
+                'status_source',
+                'status_retweet_count',
+                'status_favorite_count',
+                'status_entities',
+                'profile_background_color',
+                'profile_background_image_url',
+                'profile_background_image_url_https',
+                'profile_image_url',
+                'profile_image_url_https',
+                'profile_banner_url',
+                'profile_link_color',
+                'profile_sidebar_border_color',
+                'profile_sidebar_fill_color',
+                'profile_text_color',
+                'profile_use_background_image'
+            ];
+            array_walk_recursive($listTwitter, function(&$item, $key){
+                $item = mb_convert_encoding($item, "SJIS");
+            });
+ 
+            $this->renderCSV($header, $listTwitter, "ListTwitter.csv");
         } catch (Exception $e) {
             $message = "Error when create CSV twitter.";
             $alertClass = "alert-danger";
@@ -370,4 +447,46 @@ class WebsiteController extends Controller
 
         return redirect(route('top'))->with(compact('message', 'alertClass'));
     }
+
+    public function renderCSV($headers, $exportData, $fileName) {
+        header('Content-type: application/csv');
+        header('Content-Disposition: attachment; filename="' . $fileName . '"');
+
+        $csvFile = fopen('php://output', 'w');
+
+        fputcsv($csvFile, $headers, ',', '"');
+
+        foreach ($exportData as $row) {
+            fputcsv($csvFile, $row, ',', '"');
+        }
+
+        fclose($csvFile);
+    }
+
+    /**
+     * Convert array data UTF-8 to Shift JIS
+     *
+     * @param  array $data
+     */
+    protected function _convertDataToSjis($data) {
+        foreach ($data as $key => $value) {
+            $data[$key] = $this->_2sjis($value);
+        }
+
+        return $data;
+    }
+
+    /**
+     * Convert UTF-8 to Shift JIS
+     * @param  mix $val
+     * @return mix
+     */
+    protected function _2sjis($val) {
+        if (!is_string($val)) {
+            return $val;
+        }
+
+        return mb_convert_encoding($val, 'SJIS', 'UTF-8');
+    }
+
 }
