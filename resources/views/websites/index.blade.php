@@ -66,16 +66,31 @@
                                         </a>
                                     @endif
                                     </div>
-                                    <div class="col-sm-4 col-sm-offset-1 wr-action">
-                                        <a href="{!! route('list.face') !!}" class="link-csv">取得状況一覧</a>
-                                    </div>
+                                    @if (!Session::get('face_logined', false))
+                                        <div class="col-sm-4 col-sm-offset-1 wr-action">
+                                            <a href="javascript:void(0)" class="link-csv">取得状況一覧</a>
+                                        </div>
+                                    @else
+                                       <div class="col-sm-4 col-sm-offset-1 wr-action">
+                                            <a href="{!! route('list.face') !!}" class="link-csv">取得状況一覧</a>
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-2 col-sm-offset-1 wr-action">
-                                        <a href="{!! route('list.face.download') !!}" class="btn btn-default btn-gray">
-                                            CSVダウンロード
-                                        </a>
-                                    </div>
+                                    @if (!Session::get('face_logined', false))
+                                        <div class="col-sm-2 col-sm-offset-1 wr-action">
+                                            <a href="{!! route('list.face.download') !!}" class="btn btn-default disabled bt-disable">
+                                                CSVダウンロード
+                                            </a>
+                                        </div>
+                                    @else
+                                       <div class="col-sm-2 col-sm-offset-1 wr-action">
+                                            <a href="{!! route('list.face.download') !!}" class="btn btn-default btn-gray">
+                                                CSVダウンロード
+                                            </a>
+                                        </div>
+                                    @endif
+            
                                 </div>
                             </div>
                         </div>
@@ -115,9 +130,15 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-1 wr-action">
-                                        <a href="{!! route('add.twitter') !!}" class="btn btn-default btn-gray">
-                                            リスト登録
-                                        </a>
+                                        @if (!Session::get('twitter_loged', false))
+                                            <a href="{!! route('add.twitter') !!}" class="btn btn-default disabled bt-disable">
+                                                リスト登録
+                                            </a>
+                                        @else
+                                            <a href="{!! route('add.twitter') !!}" class="btn btn-default btn-gray">
+                                                リスト登録
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -129,19 +150,36 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-1 wr-action">
-                                        <a href="{!! route('list.all.twitter') !!}" class="btn btn-default btn-gray">
-                                            基本情報取得（更新）
-                                        </a>
+                                        @if (!Session::get('twitter_loged', false))
+                                            <a href="{!! route('list.all.twitter') !!}" class="btn btn-default disabled bt-disable">
+                                                基本情報取得（更新）
+                                            </a>
+                                        @else
+                                            <a href="{!! route('list.all.twitter') !!}" class="btn btn-default btn-gray">
+                                                基本情報取得（更新）
+                                            </a>
+                                        @endif
                                     </div>
                                     <div class="col-sm-4 col-sm-offset-1 wr-action">
-                                        <a href="{!! route('list.twitter') !!}" class="link-csv">取得状況一覧</a>
+                                        @if (!Session::get('twitter_loged', false))
+                                            <a href="javascript:void(0)" class="link-csv">取得状況一覧</a>
+                                        @else
+                                            <a href="{!! route('list.twitter') !!}" class="link-csv">取得状況一覧</a>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-1 wr-action">
-                                        <a href="{!! route('list.twitter.download') !!}" class="btn btn-default btn-gray">
-                                            CSVダウンロード
-                                        </a>
+                                        @if (!Session::get('twitter_loged', false))
+                                            <a href="{!! route('list.twitter.download') !!}" class="btn btn-default disabled bt-disable">
+                                                CSVダウンロード
+                                            </a>
+                                        @else
+                                            <a href="{!! route('list.twitter.download') !!}" class="btn btn-default btn-gray">
+                                                CSVダウンロード
+                                            </a>
+                                        @endif
+                                        
                                     </div>
                                 </div>
                             </div>

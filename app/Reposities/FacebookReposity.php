@@ -61,6 +61,11 @@ class FacebookReposity
             $this->__fb->setDefaultAccessToken(Session::get('fb_user_access_token', ''));
             $response = $this->__fb->get(Constants::API_LIST_FANPAGE_LIKES);
             $feedEdge = $response->getGraphEdge();
+            $creator = Session::get('id_user_face', null);
+            if ($creator == null) {
+                throw new Exception("Error Processing Request");
+            }
+
             do {
                 foreach ($feedEdge as $node) {
                     $nodeArr = $node->asArray();
@@ -68,6 +73,9 @@ class FacebookReposity
                     if ($isInfo) {
                         $this->storeOrUpdateInfoFanpage($nodeArr['id']);
                     }
+                    $flist = FList::where('serialno', (int)$nodeArr['id'])->first();
+                    $flist->creator = $creator;
+                    $flist->save();
                 }
             } while (($feedEdge = $this->__fb->next($feedEdge)));
         } catch (Exception $e) {

@@ -4,6 +4,7 @@ namespace App\Reposities;
 use App\Models\TList;
 use Twitter;
 use Exception;
+use Session;
 
 class TwitterReposity
 {
@@ -34,7 +35,11 @@ class TwitterReposity
     public function updatedListTwitter()
     {
         try {
-            $listTwitter = TList::all();
+            $creator = Session::get('id_user_twitter', null);
+            if ($creator == null) {
+                throw new Exception("Error Processing Request");
+            }
+            $listTwitter = TList::where('creator', $creator)->get();
             foreach ($listTwitter as $item) {
                 $this->storeOrUpdateScreenName($item->screen_name);
             }

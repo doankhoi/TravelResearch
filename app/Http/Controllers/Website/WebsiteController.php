@@ -107,6 +107,10 @@ class WebsiteController extends Controller
         $nameObject = $this->_fb->get(Constants::API_BASIC_INFO_FACEBOOK);
         $arrObject = $nameObject->getGraphNode()->asArray();
         $userLoginFace = array_key_exists("name", $arrObject) ? $arrObject["name"] : "";
+
+        //Check user face login
+        $idUserFace = array_key_exists("id", $arrObject) ? $arrObject["id"] : null;
+        Session::put('id_user_face', $idUserFace);
         Session::put('username_loged_face', $userLoginFace);
         Session::put('face_logined', true);
         return redirect(route('top'))->with(compact('message', 'alertClass'));
@@ -142,13 +146,25 @@ class WebsiteController extends Controller
 
     public function listface()
     {
-        $listFanpage = FList::paginate($this->_itemPerPage);
+        $creator = Session::get('id_user_face', null);
+        if ($creator == null) {
+            $message = "Required log in facebook.";
+            $alertClass = "alert-danger";
+            return redirect(route('top'))->with(compact('message', 'alertClass'));
+        }
+        $listFanpage = FList::where('creator', $creator)->paginate($this->_itemPerPage);
         return view('websites.listface', compact('listFanpage'));
     }
 
     public function downloadFace()
     {
         try {
+            $creator = Session::get('id_user_face', null);
+            if ($creator == null) {
+                $message = "Required log in facebook.";
+                $alertClass = "alert-danger";
+                return redirect(route('top'))->with(compact('message', 'alertClass'));
+            }
             $listFanpage = DB::table('flist')->select(
                 'serialno as id',
                 'about',
@@ -179,7 +195,7 @@ class WebsiteController extends Controller
                 'talking_about_count',
                 'username',
                 'website',
-                'were_here_count')->get();
+                'were_here_count')->where('creator', $creator)->get();
 
             $listFanpage = array_map(function($item) {
                 return (array) $item;
@@ -241,7 +257,16 @@ class WebsiteController extends Controller
     {
         try {
             Twitter::getUsers(['screen_name' => $request->screen_name, 'format' => 'array']);
-            TList::create($request->all());
+            $inputs = $request->all();
+            $idUserTwitter = Session::get('id_user_twitter', null);
+            if ($idUserTwitter == null) {
+                $message = "Required login twitter.";
+                $alertClass = "alert-danger";
+                return redirect()->back()->with(compact('message', 'alertClass'));
+            }
+            $inputs['creator'] = $idUserTwitter;
+
+            TList::create($inputs);
             $message = "Store screen_name successfully.";
             $alertClass = "alert-success";
         } catch (Exception $e) {
@@ -254,12 +279,25 @@ class WebsiteController extends Controller
 
     public function listTwitter()
     {
-        $listTwitter = TList::paginate($this->_itemPerPage);
+        $idUserTwitter = Session::get('id_user_twitter', null);
+        if ($idUserTwitter == null) {
+            $message = "Required log in  twitter.";
+            $alertClass = "alert-danger";
+            return redirect()->back()->with(compact('message', 'alertClass'));
+        }
+        $listTwitter = TList::where('creator', $idUserTwitter)->paginate($this->_itemPerPage);
         return view('websites.listtwitter', compact('listTwitter'));
     }
 
     public function downloadTwitter()
     {
+        $creator = Session::get('id_user_twitter', null);
+        if ($creator == null) {
+            $message = "Required log in twitter";
+            $alertClass = "alert-danger";
+            return redirect(route('top'))->with(compact('message', 'alertClass'));
+        }
+
         try {
             $listTwitter = DB::table('tlist')->select(
             't_id as id',
@@ -305,7 +343,7 @@ class WebsiteController extends Controller
             'profile_sidebar_border_color',
             'profile_sidebar_fill_color',
             'profile_text_color',
-            'profile_use_background_image')->get();
+            'profile_use_background_image')->where('creator', $creator)->get();
 
             $listTwitter = array_map(function($item) {
                 return (array) $item;
@@ -421,7 +459,9 @@ class WebsiteController extends Controller
                 Session::put('access_token', $token);
                 Session::put('twitter_loged', true);
                 $username = isset($credentials->name) ? $credentials->name : "";
+                $idUserTwitter = isset($credentials->id_str) ? $credentials->id_str : "";
                 Session::put('username_loged_twitter',$username);
+                Session::put('id_user_twitter', $idUserTwitter);
                 $message = "Login twitter successfully";
                 $alertClass = "alert-success";
                 return redirect(route('top'))->with(compact('message', 'alertClass'));
