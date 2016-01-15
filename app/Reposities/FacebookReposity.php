@@ -67,13 +67,20 @@ class FacebookReposity
             }
 
             do {
+                $arrId = [];
                 foreach ($feedEdge as $node) {
                     $nodeArr = $node->asArray();
                     FList::createOrUpdateGraphNode($node);
                     if ($isInfo) {
                         $this->storeOrUpdateInfoFanpage($nodeArr['id']);
                     }
-                    $flist = FList::where('serialno', (int)$nodeArr['id'])->first();
+                    $arrId[] = $nodeArr['id'];
+                }
+                foreach ($arrId as $item) {
+                    $flist = FList::where('serialno', $item)->first();
+                    if ($flist == null) {
+                        continue;
+                    }
                     $flist->creator = $creator;
                     $flist->save();
                 }

@@ -26,7 +26,7 @@ class WebsiteController extends Controller
     protected $_token;
     protected $_faceReposity;
     protected $_twitterReposity;
-    protected $_itemPerPage = 5;
+    protected $_itemPerPage = 100;
 
     public function __construct(LaravelFacebookSdk $fb)
     {
