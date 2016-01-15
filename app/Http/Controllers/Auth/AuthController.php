@@ -57,7 +57,7 @@ class AuthController extends Controller
         $throttles = in_array(ThrottlesLogins::class, class_uses_recursive(get_class($this)));
 
         if ($throttles && $this->hasTooManyLoginAttempts($request)) {
-            $message = "Đăng nhập vượt quá số lần quy định.";
+            $message = "内容を入力してください。";
             $alertClass = "alert-danger";
             return redirect()->back()->with(compact('message', 'alertClass'))->withInput();
         }
@@ -72,7 +72,7 @@ class AuthController extends Controller
                 $this->incrementLoginAttempts($request);
             }
 
-            $message = "Tên đăng nhập hoặc mật khẩu không hợp lệ.";
+            $message = "内容を入力してください。";
             $alertClass = "alert-danger";
             return redirect()->back()->with(compact('message', 'alertClass'))->withInput();
         }
@@ -93,7 +93,7 @@ class AuthController extends Controller
         }
         
         $request->session()->put('user_id', $user->id);
-        $message = "Tên đăng nhập hoặc mật khẩu không hợp lệ.";
+        $message = "内容を入力してください。";
         $alertClass = "alert-danger";
         return redirect()->back()->with(compact('message', 'alertClass'))->withInput();
     }
